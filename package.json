@@ -1,0 +1,22 @@
+{
+  "name": "picpay-loan-sre-interview-challenge",
+  "version": "1.0.0",
+  "description": "Projeto de automação de testes utilizando Cypress para validar funcionalidades críticas do site Meus Empréstimos do PicPay.",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open", 
+    "cypress:run": "cypress run"
+  },
+  "keywords": [
+    "cypress",
+    "automation",
+    "testing",
+    "picpay",
+    "qa"
+  ],
+  "author": "Larissa Dias",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^14.0.0"
+  }
+}
