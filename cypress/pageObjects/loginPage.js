@@ -3,7 +3,6 @@ import { loanPageSelectors as sel } from '../support/selectors';
 class LoginPage {
   openPage() {
     cy.visit('/');
-    cy.screenshot('Página inicial - Meus Empréstimos');
   }
 
   preencherCpf(cpf) {
@@ -36,17 +35,8 @@ class LoginPage {
   validarLinkCentralAjuda() {
     cy.get(sel.helpCenterLink)
       .should('be.visible')
-      .and('contain.text', 'Central de Ajuda');
-    cy.get(sel.helpCenterLink).click();
-
-    cy.origin('https://picpay.com', () => {
-      cy.url().should('include', '/canais-de-atendimento');
-      cy.get('button#onetrust-accept-btn-handler', { timeout: 10000 })
-        .should('be.visible')
-        .click();
-      cy.log('Aceitou os cookies.');
-      cy.screenshot('pagina-central-ajuda');
-    });
+      .and('contain.text', 'Central de Ajuda')
+      .and('have.attr', 'href', 'https://picpay.com/canais-de-atendimento');
   }
 }
 

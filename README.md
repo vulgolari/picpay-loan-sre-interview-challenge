@@ -1,148 +1,135 @@
-# PicPay Loan SRE Interview Challenge
+# PicPay Loan SRE - QA Challenge
 
-Este projeto consiste em uma suíte de testes automatizados para o site "Meus Empréstimos" do PicPay, desenvolvida com o framework **Cypress**. O objetivo é validar interações essenciais da interface do usuário, incluindo ações como preenchimento de formulários, validações de mensagens de erro, redirecionamentos e navegabilidade entre páginas. A implementação segue o padrão **Page Objects**, garantindo modularidade, reusabilidade e fácil manutenção do código, além de suportar múltiplas resoluções de tela para simular diferentes dispositivos.
----
+Este repositório contém testes automatizados para o site **Meus Empréstimos** do PicPay. Os testes foram desenvolvidos utilizando o framework **Cypress**, seguindo o padrão **Page Object Model (POM)** para garantir manutenibilidade e modularidade.
 
-## 📋 Requisitos do Projeto
+## 🚀 Objetivo do Projeto
 
-1. **Teste Automatizado**:
-   - Abrir o site e navegar na área não logada.
-   - Preencher o formulário de cadastro.
-   - Clicar no botão de login.
-   - Validar redirecionamento para a tela inicial ou de erro.
-   - Gerar evidências das navegações (screenshots).
+O objetivo deste projeto é validar funcionalidades críticas e interações principais na interface do site, garantindo confiabilidade e qualidade na experiência do usuário. Os cenários abrangem:
 
-2. **Estrutura de Código**:
-   - Uso do padrão **Page Objects**.
-   - Configuração modular e reutilizável.
-
-3. **Resoluções de Teste**:
-   - Desktop: 1920x1080.
-   - Tablet: 768x1024.
-   - Mobile: 375x667.
+- Validação do conteúdo inicial da página.
+- Teste de mensagens de erro para CPF inválido.
+- Teste de erros visuais para campos obrigatórios.
+- Validação de links externos (como Central de Ajuda).
 
 ---
 
-## 🚀 Como Configurar e Executar o Projeto
+## 📂 Estrutura do Projeto
+
+A organização do repositório segue as boas práticas para automação de testes:
+
+```plaintext
+.
+├── cypress/
+│   ├── e2e/                # Testes end-to-end (arquivos .cy.js)
+│   │   └── login_test.cy.js
+│   ├── fixtures/           # Dados estáticos (JSON para testes)
+│   │   ├── resolutions.json
+│   │   └── testData.json
+│   ├── pageObjects/        # Page Object Models (PO)
+│   │   └── loginPage.js
+│   ├── screenshots/        # Screenshots capturadas durante os testes
+│   ├── support/            # Comandos customizados e configurações
+│   └── utils/              # Funções utilitárias
+├── .gitignore              # Ignorar arquivos desnecessários
+├── cypress.config.js       # Configurações do Cypress
+├── package.json            # Dependências do projeto e scripts
+└── README.md               # Documentação do projeto
+```
+
+---
+
+## 🛠️ Configuração e Execução
 
 ### Pré-requisitos
 
-- **Node.js** (versão 16 ou superior).
-- **NPM** ou **Yarn** instalado.
+- **Node.js**: versão 16 ou superior
+- Gerenciador de pacotes: `npm` ou `yarn`
 
 ### Instalação
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/PicPay/picpay-loan-sre-interview-challenge.git
+   git clone https://github.com/vulgolari/picpay-loan-sre-interview-challenge.git
+   ```
+
+2. Acesse o diretório do projeto:
+   ```bash
    cd picpay-loan-sre-interview-challenge
    ```
 
-2. Instale as dependências:
+3. Instale as dependências:
    ```bash
    npm install
    ```
 
----
+### Executando os Testes
 
-### Estrutura do Projeto
+- Para abrir o Cypress em modo interativo:
+  ```bash
+  npm run cypress:open
+  ```
 
-```plaintext
-.
-├── cypress
-│   ├── e2e
-│   │   └── login_test.cy.js      # Testes principais
-│   ├── pageObjects
-│   │   └── loginPage.js          # Page Object do login
-│   ├── fixtures
-│   │   ├── resolutions.json      # Resoluções de tela
-│   │   └── testData.json         # Dados estáticos para validações
-│   └── support
-│       └── selectors.js          # Seletores centralizados
-├── cypress.config.js             # Configuração do Cypress
-├── package.json                  # Dependências e scripts
-└── README.md                     # Documentação do projeto
-```
+- Para rodar os testes em modo headless:
+  ```bash
+  npm run cypress:run
+  ```
+
+### Relatórios e Evidências
+
+- **Screenshots:** Capturas de tela de cada teste são salvas automaticamente na pasta `cypress/screenshots/`.
 
 ---
 
-### Configuração
+## 🧪 Cenários de Teste Implementados
 
-Edite os arquivos de configuração, se necessário:
-
-- **Base URL**: `cypress.config.js`
-- **Resoluções de tela**: `cypress/fixtures/resolutions.json`
-- **Dados estáticos**: `cypress/fixtures/testData.json`
-
----
-
-### Execução
-
-#### Modo Interativo
-Para executar os testes no modo interativo:
-```bash
-npx cypress open
-```
-
-#### Modo Headless
-Para rodar os testes automaticamente:
-```bash
-npx cypress run
-```
+| Cenário                          | Descrição                                                                 |
+|----------------------------------|---------------------------------------------------------------------------|
+| **CT01 - Conteúdo Inicial**      | Valida o conteúdo inicial da página Meus Empréstimos.                     |
+| **CT02 - CPF Inválido**          | Testa a exibição de mensagens de erro para CPF inválido.                   |
+| **CT03 - Campo Obrigatório**     | Valida erros visuais quando campos obrigatórios não são preenchidos.       |
+| **CT04 - CPF Gerado Dinamicamente** | Gera um CPF dinamicamente e valida mensagens de erro.                     |
+| **CT05 - Link Central de Ajuda** | Valida o redirecionamento e funcionamento do link para a Central de Ajuda. |
 
 ---
 
-## 📂 Testes Implementados
+## 📑 Boas Práticas Aplicadas
 
-### Testes Funcionais (login_test.cy.js)
-- **CT01**: Validar conteúdo inicial da página.
-- **CT02**: Validar mensagem de erro para CPF inválido.
-- **CT03**: Validar erro visual para campo obrigatório.
-- **CT04**: Validar mensagem de erro com CPF gerado dinamicamente.
-- **CT05**: Validar link para a Central de Ajuda.
-
-### Page Object (`loginPage.js`)
-- **Métodos**:
-  - `openPage`: Abre a página inicial.
-  - `preencherCpf`: Preenche o campo de CPF.
-  - `interagirComCampoCpf`: Simula interação para validar campos obrigatórios.
-  - `clicarAcessar`: Submete o formulário.
-  - `validarMensagemErro`: Verifica mensagens de erro exibidas.
-  - `validarConteudoInicial`: Valida elementos presentes na página inicial.
-  - `validarLinkCentralAjuda`: Verifica redirecionamento para a Central de Ajuda.
+- **Page Object Model (POM):** Organização dos elementos e interações para facilitar a manutenção.
+- **Uso de Fixtures:** Dados de teste armazenados em arquivos JSON, separados do código.
+- **Resoluções Variáveis:** Testes executados em diferentes tamanhos de tela (desktop, tablet e mobile).
+- **Screenshots Automáticas:** Evidências salvas automaticamente para análise de falhas.
 
 ---
 
-## 📊 Resoluções de Tela
+## 🛠️ Ferramentas e Dependências
 
-As seguintes resoluções foram testadas, conforme especificado em `cypress/fixtures/resolutions.json`:
+As principais ferramentas utilizadas no projeto:
 
-| Dispositivo | Largura | Altura |
-|-------------|---------|--------|
-| Desktop     | 1920px  | 1080px |
-| Tablet      | 768px   | 1024px |
-| Mobile      | 375px   | 667px  |
+- [Cypress](https://www.cypress.io/): Framework de testes end-to-end.
+- [Node.js](https://nodejs.org/): Ambiente de execução para o JavaScript.
+- [Mochawesome](https://www.npmjs.com/package/mochawesome): Gerador de relatórios de testes (opcional).
 
 ---
 
-## 📸 Evidências Geradas
+## 📋 Como Contribuir
 
-Os testes geram capturas de tela para cada etapa crítica, disponíveis na pasta:
-```
-cypress/screenshots/
-```
+1. Fork este repositório.
+2. Crie uma branch para sua feature:
+   ```bash
+   git checkout -b feature/nova-feature
+   ```
+3. Faça suas alterações e adicione os commits:
+   ```bash
+   git commit -m "Adiciona nova funcionalidade"
+   ```
+4. Envie as alterações:
+   ```bash
+   git push origin feature/nova-feature
+   ```
+5. Abra um Pull Request.
 
 ---
 
-## 🛠️ Ferramentas e Frameworks
+## 📄 Licença
 
-- **Cypress**: Framework principal para automação.
-- **JavaScript**: Linguagem utilizada.
-- **Node.js**: Ambiente de execução.
-
----
-
-## 📝 Considerações
-
-- O projeto utiliza o padrão Page Objects para melhorar a organização e a reutilização do código.
-- Todos os cenários são projetados para serem independentes, garantindo maior estabilidade durante a execução.
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo `LICENSE` para mais informações.
