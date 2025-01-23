@@ -3,25 +3,34 @@ name: Cypress Tests
 on:
   push:
     branches:
+      - main
       - challenge-qa
   pull_request:
     branches:
+      - main
       - challenge-qa
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+
     steps:
+      # Checkout do repositório
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Instalar Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
+      # Instalar dependências
       - name: Install dependencies
         run: npm install
 
+      # Executar testes do Cypress
       - name: Run Cypress tests
         run: npx cypress run
+        env:
+          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
